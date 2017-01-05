@@ -40,8 +40,8 @@
             labels: ["Current", "Rest"],
             datasets: [{
               backgroundColor: [
-                "#2ecc71",
-                "#ffffff"
+                "#{{ .CurrentColor }}",
+                "#{{ .RestColor }}"
               ],
               data: [percent, maxPercent - percent]
             }]

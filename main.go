@@ -15,6 +15,8 @@ const (
 	keyCurrentValue = "current_value"
 	keyTargetValue  = "target_value"
 	keyTitle        = "title"
+	keyCurrentColor = "current_color"
+	keyRestColor    = "rest_color"
 )
 
 const templatePath = "index.html"
@@ -25,12 +27,23 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	query := r.URL.Query()
 	currentValue := query.Get(keyCurrentValue)
 	targetValue := query.Get(keyTargetValue)
+	currentColor := query.Get(keyCurrentColor)
+	restColor := query.Get(keyRestColor)
 	percent := getPercent(currentValue, targetValue)
 	title := query.Get(keyTitle)
 
+	if currentColor == "" {
+		currentColor = "2ecc71"
+	}
+	if restColor == "" {
+		restColor = "ffffff"
+	}
+
 	variables := map[string]interface{}{
-		"Percent": percent,
-		"Title":   title,
+		"Percent":      percent,
+		"Title":        title,
+		"CurrentColor": currentColor,
+		"RestColor":    restColor,
 	}
 	tmpl, err := template.ParseFiles(templatePath)
 	if err != nil {
