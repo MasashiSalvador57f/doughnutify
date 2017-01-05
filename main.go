@@ -11,7 +11,7 @@ import (
 const port = ":9999"
 
 // Index returns rendered html to client :)
-func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	fmt.Fprint(w, "Welcome!\n")
 }
 
