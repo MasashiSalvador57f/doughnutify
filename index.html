@@ -1,11 +1,11 @@
 <canvas id="myChart" width="100%" height="100%"></canvas>
-<script src="Chart.js"></script>
+<script src="node_modules/chart.js/dist/Chart.js"></script>
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 
-var percent = 12.5;
+var percent = {{ .Percent }};
 var maxPercent = 100;
-var titleStr = "given title";
+var titleStr = {{ .Title }};
 
 Chart.pluginService.register({
   beforeDraw: function(chart) {
@@ -47,5 +47,4 @@ var myChart = new Chart(ctx, {
     responsive: true
   }
 });
-
 </script>
