@@ -1,0 +1,51 @@
+<canvas id="myChart" width="100%" height="100%"></canvas>
+<script src="Chart.js"></script>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+
+var percent = 12.5;
+var maxPercent = 100;
+var titleStr = "given title";
+
+Chart.pluginService.register({
+  beforeDraw: function(chart) {
+    var width = chart.chart.width,
+        height = chart.chart.height,
+        ctx = chart.chart.ctx;
+
+    ctx.restore();
+    var fontSize = (0.7*height / 114).toFixed(2);
+    ctx.font = fontSize + "em Verdana";
+    ctx.textBaseline = "middle";
+
+    var text = percent + "%";
+    var textX = Math.round((width - ctx.measureText(text).width) / 2);
+    var textY = height / 2;
+
+    ctx.fillText(text, textX, textY);
+    ctx.save();
+  }
+});
+
+var myChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ["Current", "Rest"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#ffffff"
+      ],
+      data: [percent, maxPercent - percent]
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: titleStr
+    },
+    responsive: true
+  }
+});
+
+</script>
